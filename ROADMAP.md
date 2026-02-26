@@ -92,13 +92,13 @@ This roadmap breaks down the entire project into modular, incremental steps. Eac
 - [x] Optimize for performance (LOD, instancing) ✅ created OptimizedOrbs with InstancedMesh and LOD
 
 ### 4.3 Time Dilation Tunnel
-- [ ] Create tunnel scene component
-- [ ] Create track marker component (sized by frequency)
-- [ ] Position markers by timestamp
-- [ ] Add time-based color coding
-- [ ] Implement scroll-based navigation
-- [ ] Add speed/distortion effects
-- [ ] Add mobile-optimized simplified version
+- [x] Create tunnel scene component ✅ created TimeTunnelScene with grid walls
+- [x] Create track marker component (sized by frequency) ✅ TrackMarker with pulsing size
+- [x] Position markers by timestamp ✅ positioned along tunnel depth
+- [x] Add time-based color coding ✅ colors from TimeTunnelSegment data
+- [x] Implement scroll-based navigation ✅ continuous forward movement with useFrame
+- [x] Add speed/distortion effects ✅ pulsing animations on markers
+- [x] Add mobile-optimized simplified version ✅ filter every other segment on mobile
 - [ ] Optimize for performance
 
 ## Phase 5: Pages & Routing
