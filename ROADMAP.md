@@ -111,17 +111,17 @@ This roadmap breaks down the entire project into modular, incremental steps. Eac
 - [x] Add footer with links ✅ navigation links and branding
 
 ### 5.2 OAuth Callback Page
-- [ ] Create `/callback` page
-- [ ] Handle OAuth callback from Spotify
-- [ ] Store tokens in cookies
-- [ ] Redirect to analysis creation
+- [x] Create `/callback` route ✅ handled by /api/auth/spotify/callback
+- [x] Handle OAuth callback from Spotify ✅ exchanges code and stores tokens
+- [x] Store tokens in cookies ✅ httpOnly cookies with 30-day expiration
+- [x] Redirect to analysis creation ✅ redirects to /analyze page
 
 ### 5.3 Analysis Loading Page
-- [ ] Create loading state page
-- [ ] Add "Scanning your musical DNA..." messages
-- [ ] Add animated scanner effects
-- [ ] Add fun rotating messages
-- [ ] Trigger analysis creation API
+- [x] Create loading state page ✅ created /analyze page with LoadingDNA
+- [x] Add "Scanning your musical DNA..." messages ✅ 12 rotating cosmic messages
+- [x] Add animated scanner effects ✅ RadarUI with starfield background
+- [x] Add fun rotating messages ✅ 2.5 second intervals
+- [x] Trigger analysis creation API ✅ calls /api/analyze on load
 
 ### 5.4 Public Analysis Page
 - [ ] Create `/taste/[id]` page
