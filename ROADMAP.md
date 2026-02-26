@@ -82,7 +82,7 @@ This roadmap breaks down the entire project into modular, incremental steps. Eac
 - [x] Create cosmic typography components ✅ created CosmicText, GlowingText, NeonText, OrbitText, ScannerText
 
 ### 4.2 Genetic Audio Helix
-- [ ] Create Three.js scene setup component
+- [x] Create Three.js scene setup component ✅ created SceneSetup with camera, lights, stars
 - [ ] Create double helix geometry generator
 - [ ] Create audio orb component with glow effects
 - [ ] Position orbs on helix based on audio features
