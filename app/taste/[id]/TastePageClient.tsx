@@ -2,9 +2,6 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import SceneSetup from '@/components/visualizations/SceneSetup';
-import GeneticHelix from '@/components/visualizations/GeneticHelix';
-import TimeTunnelScene from '@/components/visualizations/TimeTunnelScene';
 import { AnalysisResponse } from '@/types';
 import ShareButtons from '@/components/shared/ShareButtons';
 import { ZineBackground, InkDistortionFilter, TapeStrip, Sticker } from '@/components/zine/ZineElements';
@@ -17,7 +14,6 @@ export default function TastePageClient({ id }: TastePageClientProps) {
   const [analysis, setAnalysis] = useState<AnalysisResponse | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [activeTab, setActiveTab] = useState<'helix' | 'tunnel'>('helix');
 
   useEffect(() => {
     const fetchAnalysis = async () => {
@@ -74,7 +70,7 @@ export default function TastePageClient({ id }: TastePageClientProps) {
     );
   }
 
-  const { geneticHelix, timeTunnel, summary, aiStory } = analysis.analysis;
+  const { geneticHelix, summary, aiStory } = analysis.analysis;
 
   return (
     <div className="min-h-screen bg-[#e8e4db] text-[#1a1a1a] font-mono overflow-x-hidden selection:bg-[#ff3e3e] selection:text-white relative">
@@ -113,60 +109,6 @@ export default function TastePageClient({ id }: TastePageClientProps) {
              />
           </div>
         </header>
-
-        {/* The 3D Anomalies - Helix and Tunnel */}
-        <section className="space-y-12">
-          <div className="flex flex-col md:flex-row gap-4 mb-8">
-            <button
-              onClick={() => setActiveTab('helix')}
-              className={`px-8 py-4 zine-card font-shade text-xl flex-1 transition-all ${activeTab === 'helix' ? 'bg-[#ff3e3e] text-white -translate-y-1' : 'bg-white'}`}
-            >
-              🧬 GENETIC_DATA
-            </button>
-            <button
-              onClick={() => setActiveTab('tunnel')}
-              className={`px-8 py-4 zine-card font-shade text-xl flex-1 transition-all ${activeTab === 'tunnel' ? 'bg-[#ff3e3e] text-white -translate-y-1' : 'bg-white'}`}
-            >
-              🌌 TEMPORAL_LOG
-            </button>
-          </div>
-
-          <div className="zine-card h-[60vh] min-h-[400px] bg-black overflow-hidden relative group">
-            <div className="absolute top-4 left-4 z-20 pointer-events-none">
-               <div className="bg-white text-black px-2 py-1 font-mono text-[10px] font-black uppercase">Figure 0{activeTab === 'helix' ? '1' : '2'}: Sonic Anomaly</div>
-            </div>
-            
-            <SceneSetup
-              cameraPosition={activeTab === 'helix' ? [0, 0, 15] : [0, 0, 20]}
-              enableControls={true}
-            >
-              {activeTab === 'helix' ? (
-                <GeneticHelix data={geneticHelix} />
-              ) : (
-                <TimeTunnelScene data={timeTunnel} />
-              )}
-            </SceneSetup>
-
-            {/* Legend - Taped on */}
-            <div className="absolute bottom-4 left-4 z-20 zine-card p-4 bg-white/90 backdrop-blur-sm text-[10px] md:text-xs">
-              <TapeStrip className="-top-2 -left-2 rotate-12 scale-50" />
-              {activeTab === 'helix' ? (
-                <div className="space-y-1 font-mono font-bold">
-                  <p className="text-[#4ECDC4]">● ENERGY_STRAND</p>
-                  <p className="text-[#6C5CE7]">● MOOD_STRAND</p>
-                  <p className="text-red-600">○ SIGNAL_POINTS</p>
-                </div>
-              ) : (
-                <div className="space-y-1 font-mono font-bold">
-                  <p className="text-[#FFD93D]">● MORNING_INPUT</p>
-                  <p className="text-[#FF6B6B]">● AFTERNOON_INPUT</p>
-                  <p className="text-[#4ECDC4]">● EVENING_INPUT</p>
-                  <p className="text-[#6C5CE7]">● NIGHT_INPUT</p>
-                </div>
-              )}
-            </div>
-          </div>
-        </section>
 
         {/* Data Grid */}
         <section className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-12 relative">
