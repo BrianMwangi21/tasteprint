@@ -18,6 +18,7 @@ export default function AnalyzePage() {
           headers: {
             'Content-Type': 'application/json',
           },
+          credentials: 'include',
         });
 
         if (!response.ok) {
