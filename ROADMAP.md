@@ -85,10 +85,10 @@ This roadmap breaks down the entire project into modular, incremental steps. Eac
 - [x] Create Three.js scene setup component ✅ created SceneSetup with camera, lights, stars
 - [x] Create double helix geometry generator ✅ created DoubleHelix with strands and rungs
 - [x] Create audio orb component with glow effects ✅ created AudioOrbs with emissive materials
-- [ ] Position orbs on helix based on audio features
-- [ ] Add rotation animation
-- [ ] Add hover interactions (show track info)
-- [ ] Add mobile-optimized simplified version
+- [x] Position orbs on helix based on audio features ✅ created GeneticHelix combining DoubleHelix and AudioOrbs
+- [x] Add rotation animation ✅ continuous rotation with useFrame
+- [x] Add hover interactions (show track info) ✅ info panel with audio feature bars
+- [x] Add mobile-optimized simplified version ✅ reduced tracks/segments for mobile
 - [ ] Optimize for performance (LOD, instancing)
 
 ### 4.3 Time Dilation Tunnel
