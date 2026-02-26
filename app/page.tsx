@@ -53,7 +53,7 @@ export default function Home() {
         <section className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full">
           {[
             { step: "01", text: "SYNC YOUR SIGNAL", desc: "Connect your Spotify frequency.", rotate: "rotate-1" },
-            { step: "02", text: "ANALYZE THE NOISE", desc: "We decrypt 100+ audio features.", rotate: "-rotate-2" },
+            { step: "02", text: "ANALYZE THE NOISE", desc: "We extract your sonic fingerprints.", rotate: "-rotate-2" },
             { step: "03", text: "PRINT THE TRUTH", desc: "Get your personalized zine.", rotate: "rotate-1" },
           ].map((item, i) => (
             <div key={i} className={`zine-card p-8 flex flex-col items-center justify-center space-y-4 ${item.rotate} bg-white`}>
