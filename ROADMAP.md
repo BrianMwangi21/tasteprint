@@ -7,10 +7,10 @@ This roadmap breaks down the entire project into modular, incremental steps. Eac
 ### 1.1 Project Setup
 - [x] Install Mongoose (`mongoose` - includes MongoDB driver) ✅ v9.2.2 installed
 - [x] Install Three.js dependencies (`three`, `@react-three/fiber`, `@react-three/drei`) ✅ installed
-- [ ] Install OpenRouter AI SDK (`@openrouter/ai-sdk-provider`)
-- [ ] Install OG image generation (`@vercel/og`)
-- [ ] Install utility libraries (`nanoid`, `clsx`, `tailwind-merge`)
-- [ ] Create TypeScript types file (`types/index.ts`)
+- [x] Install OpenRouter AI SDK (`@openrouter/ai-sdk-provider`) ✅ v2.2.3 installed
+- [x] Install OG image generation (`@vercel/og`) ✅ v0.9.0 installed
+- [x] Install utility libraries (`nanoid`, `clsx`, `tailwind-merge`) ✅ installed
+- [x] Create TypeScript types file (`types/index.ts`) ✅ created with comprehensive types
 - [ ] Create directory structure (app, components, lib, models, types)
 
 ### 1.2 Database Setup
