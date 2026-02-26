@@ -1,36 +1,17 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🛸 TastePrint
 
-## Getting Started
+**Stop listening. Start observing.**
 
-First, run the development server:
+TastePrint takes your Spotify data and launches it into deep space. We don't just tell you that you like "sad indie"—we build a 3D universe out of it.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+### 🌌 The Mission
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+*   🧬 **Musical DNA**: Your top tracks are woven into a rotating **Genetic Helix**. Interact with the orbs of your sonic existence in full 3D.
+*   🌀 **Temporal Warp**: Fly through the **Time Dilation Tunnel**, where your listening history becomes a tunnel of light and sound, scaled by your frequency.
+*   ✍️ **Cosmic Storytelling**: Our AI-powered observatory translates your stats into a poetic, astronomical narrative. Discover if your taste is a *Celestial Supernova* or a *Glimmering Nebula*.
+*   🔭 **Universal Discovery**: Peer into the musical blueprints of other travelers across the soundscape in the public feed.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+**Your music isn't just a list. It's a galaxy.**
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+*Built with Next.js, Three.js, and OpenRouter.*
