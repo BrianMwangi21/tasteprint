@@ -73,6 +73,8 @@ export default function TastePageClient({ id }: TastePageClientProps) {
   const { summary, aiStory } = analysis.analysis;
   const { topTracks, topArtists, recentlyPlayed } = analysis.data;
 
+  const filteredGenres = summary.topGenres?.filter(g => g && g.trim().length > 0) || [];
+
   return (
     <div className="min-h-screen bg-[#e8e4db] text-[#1a1a1a] font-mono overflow-x-hidden selection:bg-[#ff3e3e] selection:text-white relative pb-32">
       <ZineBackground />
@@ -145,7 +147,7 @@ export default function TastePageClient({ id }: TastePageClientProps) {
                   {/* Censorship Bar */}
                   <div className="absolute top-1/3 left-0 w-full h-8 bg-black z-20 group-hover:translate-x-full transition-transform duration-700 ease-in-out" />
                   <div className="absolute top-4 left-4 z-30">
-                    <span className="bg-red-600 text-white font-mono text-[8px] font-black px-2 py-1">LVL: {artist.popularity}</span>
+                    <span className="bg-red-600 text-white font-mono text-[8px] font-black px-2 py-1">LVL: {(i + 1).toString().padStart(2, '0')}</span>
                   </div>
                 </div>
                 <div className="p-4 space-y-2">
@@ -189,9 +191,9 @@ export default function TastePageClient({ id }: TastePageClientProps) {
              <div className="h-2 md:h-3 w-full bg-black/10" />
           </div>
 
-          {summary.topGenres && summary.topGenres.length > 0 ? (
+          {filteredGenres.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {summary.topGenres.filter(g => g && g.trim().length > 0).map((genre, i) => (
+              {filteredGenres.map((genre, i) => (
                 <div key={i} className="flex gap-4 group cursor-none">
                   <div className="font-glitch text-4xl md:text-6xl opacity-10 group-hover:opacity-100 group-hover:text-red-600 transition-all">0{i+1}</div>
                   <div className="flex-1 border-b-2 border-dashed border-black/20 pb-4">
