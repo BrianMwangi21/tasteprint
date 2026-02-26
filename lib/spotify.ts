@@ -10,21 +10,22 @@ import { getSessionAccessToken } from './session';
 import { getValidAccessToken, SpotifyTokens, SpotifyUserProfile } from './spotify-auth';
 
 class SpotifyAPI {
+  private async getAccessToken(tokens?: SpotifyTokens): Promise<string> {
+    if (tokens) {
+      return getValidAccessToken(tokens);
+    }
+    const sessionToken = await getSessionAccessToken();
+    if (!sessionToken) {
+      throw new Error('No access token available');
+    }
+    return sessionToken;
+  }
+
   private async fetchWithAuth(
     endpoint: string,
     tokens?: SpotifyTokens
   ): Promise<Response> {
-    let accessToken: string;
-    
-    if (tokens) {
-      accessToken = await getValidAccessToken(tokens);
-    } else {
-      accessToken = await getSessionAccessToken() || '';
-    }
-    
-    if (!accessToken) {
-      throw new Error('No access token available');
-    }
+    const accessToken = await this.getAccessToken(tokens);
 
     const response = await fetch(`https://api.spotify.com/v1${endpoint}`, {
       headers: {
@@ -39,6 +40,10 @@ class SpotifyAPI {
         throw new Error(`Rate limited. Retry after ${retryAfter} seconds`);
       }
       
+      console.warn('[spotify] request failed', {
+        endpoint,
+        status: response.status,
+      });
       const error = await response.text();
       throw new Error(`Spotify API error: ${response.status} - ${error}`);
     }
@@ -87,20 +92,6 @@ class SpotifyAPI {
     );
     const data = await response.json();
     return data.items;
-  }
-
-  async getAudioFeatures(
-    trackIds: string[],
-    tokens?: SpotifyTokens
-  ): Promise<SpotifyAudioFeatures[]> {
-    if (trackIds.length === 0) return [];
-    
-    const response = await this.fetchWithAuth(
-      `/audio-features?ids=${trackIds.slice(0, 100).join(',')}`,
-      tokens
-    );
-    const data = await response.json();
-    return data.audio_features.filter(Boolean);
   }
 
   async getSavedTracksCount(tokens?: SpotifyTokens): Promise<number> {
@@ -162,21 +153,6 @@ class SpotifyAPI {
       this.getPlaylists(50, tokens),
     ]);
 
-    const allTrackIds = [
-      ...topTracksShort.map(t => t.id),
-      ...topTracksMedium.map(t => t.id),
-      ...topTracksLong.map(t => t.id),
-      ...recentlyPlayed.map(rp => rp.track.id),
-    ].filter((id, index, self) => self.indexOf(id) === index);
-
-    let audioFeatures: SpotifyAudioFeatures[] = [];
-    
-    for (let i = 0; i < allTrackIds.length; i += 100) {
-      const batch = allTrackIds.slice(i, i + 100);
-      const batchFeatures = await this.getAudioFeatures(batch, tokens);
-      audioFeatures = [...audioFeatures, ...batchFeatures];
-    }
-
     return {
       user,
       topTracks: {
@@ -190,7 +166,7 @@ class SpotifyAPI {
         longTerm: topArtistsLong,
       },
       recentlyPlayed,
-      audioFeatures,
+      audioFeatures: [] as SpotifyAudioFeatures[],
       savedTracksCount,
       playlists,
     };

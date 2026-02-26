@@ -10,11 +10,13 @@ export async function getSessionTokens(): Promise<SpotifyTokens | null> {
     const tokensCookie = cookieStore.get(TOKENS_COOKIE);
     
     if (!tokensCookie?.value) {
+      console.info('[session] tokens cookie missing');
       return null;
     }
     
     return JSON.parse(tokensCookie.value);
   } catch {
+    console.warn('[session] tokens cookie parse failed');
     return null;
   }
 }
@@ -25,11 +27,13 @@ export async function getSessionUser(): Promise<SpotifyUserProfile | null> {
     const userCookie = cookieStore.get(USER_COOKIE);
     
     if (!userCookie?.value) {
+      console.info('[session] user cookie missing');
       return null;
     }
     
     return JSON.parse(userCookie.value);
   } catch {
+    console.warn('[session] user cookie parse failed');
     return null;
   }
 }
@@ -57,8 +61,12 @@ export async function isAuthenticated(): Promise<boolean> {
 export async function requireAuth(): Promise<{ tokens: SpotifyTokens; user: SpotifyUserProfile }> {
   const tokens = await getSessionTokens();
   const user = await getSessionUser();
-  
+
   if (!tokens || !user) {
+    console.warn('[session] authentication required', {
+      hasTokens: Boolean(tokens),
+      hasUser: Boolean(user),
+    });
     throw new Error('Authentication required');
   }
   

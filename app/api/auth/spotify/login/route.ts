@@ -3,8 +3,10 @@ import { getSpotifyAuthUrl, generateState } from '@/lib/spotify-auth';
 
 export async function GET() {
   try {
+    console.info('[spotify-login] starting OAuth flow');
     const state = generateState();
     const authUrl = getSpotifyAuthUrl(state);
+    console.info('[spotify-login] authUrl host', new URL(authUrl).host);
     
     const response = NextResponse.redirect(authUrl);
     

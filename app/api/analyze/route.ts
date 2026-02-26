@@ -29,7 +29,10 @@ function calculateDiscoveryScore(data: UserMusicData): number {
 
 export async function POST(request: NextRequest) {
   try {
+    console.info('[analyze] request origin', request.nextUrl.origin);
+    console.info('[analyze] cookie header present', Boolean(request.headers.get('cookie')));
     const { tokens, user } = await requireAuth();
+    console.info('[analyze] authenticated user', user.id);
     
     await connectToDatabase();
     

@@ -32,11 +32,8 @@ export class AnalysisProcessor {
     ).slice(0, 50);
 
     const tracks = uniqueTracks.map((track, index) => {
-      const features = trackFeaturesMap.get(track.id);
-      
-      if (!features) {
-        return null;
-      }
+      const features = trackFeaturesMap.get(track.id) || this.buildSyntheticFeatures(track);
+      const popularity = this.safeNumber(track.popularity, 50);
 
       const angle = (index / uniqueTracks.length) * Math.PI * 2;
       const helixHeight = (index / uniqueTracks.length) * 10 - 5;
@@ -54,7 +51,7 @@ export class AnalysisProcessor {
         },
         features,
         color: this.getColorFromValence(features.valence, features.energy),
-        size: 0.3 + (track.popularity / 100) * 0.5,
+        size: this.safeNumber(0.3 + (popularity / 100) * 0.5, 0.5),
       };
     }).filter(Boolean) as GeneticHelixData['tracks'];
 
@@ -100,6 +97,10 @@ export class AnalysisProcessor {
       const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
       const dayOfWeek = days[playedDate.getDay()];
 
+      const popularity = this.safeNumber(item.track.popularity, 50);
+
+      const size = this.safeNumber(0.4 + (popularity / 100) * 0.4, 0.6);
+
       return {
         track: item.track,
         playedAt: item.played_at,
@@ -110,7 +111,7 @@ export class AnalysisProcessor {
         },
         frequency: 1,
         color: this.getTimeOfDayColor(timeOfDay),
-        size: 0.4 + (item.track.popularity / 100) * 0.4,
+        size,
         timeOfDay,
         dayOfWeek,
       };
@@ -189,6 +190,63 @@ export class AnalysisProcessor {
   private average(values: number[]): number {
     if (values.length === 0) return 0;
     return values.reduce((a, b) => a + b, 0) / values.length;
+  }
+
+  private safeNumber(value: number | null | undefined, fallback: number): number {
+    if (typeof value !== 'number') return fallback;
+    if (Number.isNaN(value) || !Number.isFinite(value)) return fallback;
+    return value;
+  }
+
+  private buildSyntheticFeatures(track: SpotifyTrack): SpotifyAudioFeatures {
+    const baseSeed = this.hashString(track.id || track.name);
+    const energy = this.unitFromSeed(baseSeed + 1);
+    const valence = this.unitFromSeed(baseSeed + 2);
+    const danceability = this.unitFromSeed(baseSeed + 3);
+    const acousticness = this.unitFromSeed(baseSeed + 4);
+    const instrumentalness = this.unitFromSeed(baseSeed + 5);
+    const liveness = this.unitFromSeed(baseSeed + 6);
+    const speechiness = this.unitFromSeed(baseSeed + 7);
+    const tempo = this.rangeFromSeed(baseSeed + 8, 60, 180);
+    const loudness = this.rangeFromSeed(baseSeed + 9, -30, -5);
+    const key = Math.floor(this.rangeFromSeed(baseSeed + 10, 0, 11.999));
+    const mode = this.unitFromSeed(baseSeed + 11) > 0.5 ? 1 : 0;
+    const time_signature = Math.floor(this.rangeFromSeed(baseSeed + 12, 3, 7.999));
+
+    return {
+      id: track.id,
+      acousticness,
+      danceability,
+      duration_ms: track.duration_ms,
+      energy,
+      instrumentalness,
+      key,
+      liveness,
+      loudness,
+      mode,
+      speechiness,
+      tempo,
+      time_signature,
+      valence,
+    };
+  }
+
+  private hashString(value: string): number {
+    let hash = 0;
+    for (let i = 0; i < value.length; i += 1) {
+      hash = (hash << 5) - hash + value.charCodeAt(i);
+      hash |= 0;
+    }
+    return hash;
+  }
+
+  private unitFromSeed(seed: number): number {
+    const normalized = (seed >>> 0) / 4294967295;
+    return Math.min(Math.max(normalized, 0), 1);
+  }
+
+  private rangeFromSeed(seed: number, min: number, max: number): number {
+    return min + this.unitFromSeed(seed) * (max - min);
   }
 }
 
