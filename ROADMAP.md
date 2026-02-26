@@ -77,7 +77,7 @@ This roadmap breaks down the entire project into modular, incremental steps. Eac
 ### 4.1 Cosmic Observatory UI Components
 - [x] Create Starfield background component (`components/ui/Starfield.tsx`) ✅ created with 1000+ animated stars
 - [x] Create Aurora gradient background component ✅ created with animated gradients
-- [ ] Create scanner/radar UI elements
+- [x] Create scanner/radar UI elements ✅ created ScannerUI and RadarUI components
 - [ ] Create loading DNA animation component (`components/ui/LoadingDNA.tsx`)
 - [ ] Create cosmic typography components
 
