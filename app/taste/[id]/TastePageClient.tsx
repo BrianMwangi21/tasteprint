@@ -14,6 +14,7 @@ export default function TastePageClient({ id }: TastePageClientProps) {
   const [analysis, setAnalysis] = useState<AnalysisResponse | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [activeArtistId, setActiveArtistId] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchAnalysis = async () => {
@@ -136,30 +137,37 @@ export default function TastePageClient({ id }: TastePageClientProps) {
           </div>
           
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
-            {topArtists.mediumTerm.slice(0, 10).map((artist, i) => (
-              <div key={artist.id} className="zine-card p-0 bg-white overflow-hidden group">
-                <div className="relative aspect-square overflow-hidden bg-black">
-                  <img 
-                    src={artist.images[0]?.url} 
-                    alt={artist.name}
-                    className="w-full h-full object-cover grayscale contrast-125 brightness-75 group-hover:grayscale-0 group-hover:brightness-100 transition-all duration-500"
-                  />
-                  {/* Censorship Bar */}
-                  <div className="absolute top-1/3 left-0 w-full h-8 bg-black z-20 group-hover:translate-x-full transition-transform duration-700 ease-in-out" />
-                  <div className="absolute top-4 left-4 z-30">
-                    <span className="bg-red-600 text-white font-mono text-[8px] font-black px-2 py-1">LVL: {(i + 1).toString().padStart(2, '0')}</span>
+            {topArtists.mediumTerm.slice(0, 10).map((artist, i) => {
+              const isActive = activeArtistId === artist.id;
+              return (
+                <div 
+                  key={artist.id} 
+                  onClick={() => setActiveArtistId(isActive ? null : artist.id)}
+                  className="zine-card p-0 bg-white overflow-hidden group cursor-pointer"
+                >
+                  <div className="relative aspect-square overflow-hidden bg-black">
+                    <img 
+                      src={artist.images[0]?.url} 
+                      alt={artist.name}
+                      className={`w-full h-full object-cover grayscale contrast-125 brightness-75 group-hover:grayscale-0 group-hover:brightness-100 transition-all duration-500 ${isActive ? 'grayscale-0 brightness-100' : ''}`}
+                    />
+                    {/* Censorship Bar */}
+                    <div className={`absolute top-1/3 left-0 w-full h-8 bg-black z-20 group-hover:translate-x-full transition-transform duration-700 ease-in-out ${isActive ? 'translate-x-full' : ''}`} />
+                    <div className="absolute top-4 left-4 z-30">
+                      <span className="bg-red-600 text-white font-mono text-[8px] font-black px-2 py-1">LVL: {(i + 1).toString().padStart(2, '0')}</span>
+                    </div>
+                  </div>
+                  <div className="p-4 space-y-2">
+                    <h3 className={`font-marker text-xl truncate uppercase transition-colors ${isActive ? 'text-red-600' : ''}`}>{artist.name}</h3>
+                    <div className="flex flex-wrap gap-1">
+                      {artist.genres.slice(0, 2).map(g => (
+                        <span key={g} className="font-mono text-[8px] bg-black text-white px-1 uppercase">{g}</span>
+                      ))}
+                    </div>
                   </div>
                 </div>
-                <div className="p-4 space-y-2">
-                  <h3 className="font-marker text-xl truncate uppercase">{artist.name}</h3>
-                  <div className="flex flex-wrap gap-1">
-                    {artist.genres.slice(0, 2).map(g => (
-                      <span key={g} className="font-mono text-[8px] bg-black text-white px-1 uppercase">{g}</span>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </section>
 
