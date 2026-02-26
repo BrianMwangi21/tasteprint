@@ -136,3 +136,15 @@ export function verifyState(state: string): boolean {
     return false;
   }
 }
+
+export function isTokenExpired(tokens: SpotifyTokens): boolean {
+  return Date.now() >= tokens.expires_at - 5 * 60 * 1000; // Refresh 5 mins before expiry
+}
+
+export async function getValidAccessToken(tokens: SpotifyTokens): Promise<string> {
+  if (isTokenExpired(tokens)) {
+    const refreshed = await refreshAccessToken(tokens.refresh_token);
+    return refreshed.access_token;
+  }
+  return tokens.access_token;
+}

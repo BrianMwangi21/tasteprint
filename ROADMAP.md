@@ -23,7 +23,7 @@ This roadmap breaks down the entire project into modular, incremental steps. Eac
 - [x] Create Spotify authentication utilities (`lib/spotify-auth.ts`) ✅ created with OAuth flow
 - [x] Create `/api/auth/spotify/login` route (redirects to Spotify) ✅ created with state cookie
 - [x] Create `/api/auth/spotify/callback` route (handles code exchange) ✅ created with token/user cookies
-- [ ] Create token management utilities (refresh tokens)
+- [x] Create token management utilities (refresh tokens) ✅ added to spotify-auth.ts
 - [ ] Add cookie-based session storage
 
 ## Phase 2: Data Fetching & Processing
