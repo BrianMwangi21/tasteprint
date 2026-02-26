@@ -45,10 +45,10 @@ This roadmap breaks down the entire project into modular, incremental steps. Eac
 - [x] Create listening habit insights generator ✅ included in processor
 
 ### 2.3 AI Story Generation
-- [ ] Create OpenRouter client setup (`lib/openrouter.ts`)
-- [ ] Design prompt template for cosmic story generation
-- [ ] Create function to generate taste narrative
-- [ ] Test AI generation with sample data
+- [x] Create OpenRouter client setup (`lib/openrouter.ts`) ✅ created with Claude 3.5 Sonnet
+- [x] Design prompt template for cosmic story generation ✅ designed with cosmic/astronomical metaphors
+- [x] Create function to generate taste narrative ✅ implemented generateTasteStory()
+- [ ] Test AI generation with sample data (will test during integration)
 
 ## Phase 3: API Endpoints
 
