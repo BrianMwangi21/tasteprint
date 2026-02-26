@@ -16,11 +16,11 @@ This roadmap breaks down the entire project into modular, incremental steps. Eac
 ### 1.2 Database Setup
 - [x] Create MongoDB connection utility (`lib/mongodb.ts`) ✅ created with connection caching
 - [x] Create Mongoose Analysis schema (`models/Analysis.ts`) ✅ created with full schema
-- [ ] Create database type definitions
-- [ ] Test database connection
+- [x] Create database type definitions ✅ included in types/index.ts
+- [ ] Test database connection (requires running app - will test during development)
 
 ### 1.3 Spotify OAuth Foundation
-- [ ] Create Spotify authentication utilities (`lib/spotify-auth.ts`)
+- [x] Create Spotify authentication utilities (`lib/spotify-auth.ts`) ✅ created with OAuth flow
 - [ ] Create `/api/auth/spotify/login` route (redirects to Spotify)
 - [ ] Create `/api/auth/spotify/callback` route (handles code exchange)
 - [ ] Create token management utilities (refresh tokens)
