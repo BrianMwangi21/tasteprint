@@ -33,11 +33,11 @@ export interface SpotifyUserProfile {
   followers: { total: number };
 }
 
-export function getSpotifyAuthUrl(state: string): string {
+export function getSpotifyAuthUrl(state: string, redirectUri?: string): string {
   const params = new URLSearchParams({
     client_id: SPOTIFY_CLIENT_ID!,
     response_type: 'code',
-    redirect_uri: SPOTIFY_REDIRECT_TARGET!,
+    redirect_uri: redirectUri || SPOTIFY_REDIRECT_TARGET!,
     scope: SPOTIFY_SCOPES.join(' '),
     state: state,
   });
@@ -45,7 +45,7 @@ export function getSpotifyAuthUrl(state: string): string {
   return `${SPOTIFY_AUTH_URL}?${params.toString()}`;
 }
 
-export async function exchangeCodeForTokens(code: string): Promise<SpotifyTokens> {
+export async function exchangeCodeForTokens(code: string, redirectUri?: string): Promise<SpotifyTokens> {
   const response = await fetch(SPOTIFY_TOKEN_URL, {
     method: 'POST',
     headers: {
@@ -57,7 +57,7 @@ export async function exchangeCodeForTokens(code: string): Promise<SpotifyTokens
     body: new URLSearchParams({
       grant_type: 'authorization_code',
       code: code,
-      redirect_uri: SPOTIFY_REDIRECT_TARGET!,
+      redirect_uri: redirectUri || SPOTIFY_REDIRECT_TARGET!,
     }),
   });
 
