@@ -28,13 +28,13 @@ This roadmap breaks down the entire project into modular, incremental steps. Eac
 ## Phase 2: Data Fetching & Processing
 
 ### 2.1 Spotify Data Service
-- [ ] Create Spotify API client wrapper (`lib/spotify.ts`)
-- [ ] Create function to fetch user profile
-- [ ] Create function to fetch top tracks (short, medium, long term)
-- [ ] Create function to fetch top artists
-- [ ] Create function to fetch recently played tracks
-- [ ] Create function to fetch audio features for tracks
-- [ ] Create function to fetch saved tracks count
+- [x] Create Spotify API client wrapper (`lib/spotify.ts`) ✅ created with full API methods
+- [x] Create function to fetch user profile ✅ included in wrapper
+- [x] Create function to fetch top tracks (short, medium, long term) ✅ included in wrapper
+- [x] Create function to fetch top artists ✅ included in wrapper
+- [x] Create function to fetch recently played tracks ✅ included in wrapper
+- [x] Create function to fetch audio features for tracks ✅ included in wrapper
+- [x] Create function to fetch saved tracks count ✅ included in wrapper
 
 ### 2.2 Data Analysis Engine
 - [ ] Create analysis processor (`lib/analysis.ts`)
