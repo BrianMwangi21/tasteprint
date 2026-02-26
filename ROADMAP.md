@@ -83,7 +83,7 @@ This roadmap breaks down the entire project into modular, incremental steps. Eac
 
 ### 4.2 Genetic Audio Helix
 - [x] Create Three.js scene setup component ✅ created SceneSetup with camera, lights, stars
-- [ ] Create double helix geometry generator
+- [x] Create double helix geometry generator ✅ created DoubleHelix with strands and rungs
 - [ ] Create audio orb component with glow effects
 - [ ] Position orbs on helix based on audio features
 - [ ] Add rotation animation
