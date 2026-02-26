@@ -7,6 +7,10 @@ import {
 } from '@/lib/spotify-auth';
 
 export async function GET(request: Request) {
+  // Get the origin from the request URL at the start
+  const requestUrl = new URL(request.url);
+  const origin = requestUrl.origin;
+  
   try {
     const { searchParams } = new URL(request.url);
     const code = searchParams.get('code');
@@ -15,13 +19,13 @@ export async function GET(request: Request) {
 
     if (error) {
       return NextResponse.redirect(
-        new URL(`/?error=${encodeURIComponent(error)}`, request.url)
+        new URL(`/?error=${encodeURIComponent(error)}`, origin)
       );
     }
 
     if (!code) {
       return NextResponse.redirect(
-        new URL(`/?error=${encodeURIComponent('No authorization code received')}`, request.url)
+        new URL(`/?error=${encodeURIComponent('No authorization code received')}`, origin)
       );
     }
 
@@ -33,14 +37,15 @@ export async function GET(request: Request) {
 
     if (!stateCookie || !verifyState(state || '')) {
       return NextResponse.redirect(
-        new URL(`/?error=${encodeURIComponent('Invalid or expired state')}`, request.url)
+        new URL(`/?error=${encodeURIComponent('Invalid or expired state')}`, origin)
       );
     }
 
     const tokens = await exchangeCodeForTokens(code);
     const userProfile = await getSpotifyUserProfile(tokens.access_token);
 
-    const response = NextResponse.redirect(new URL('/analyze', request.url));
+    // Use the origin for redirect to preserve the exact hostname
+    const response = NextResponse.redirect(new URL('/analyze', origin));
 
     response.cookies.set('spotify_tokens', JSON.stringify(tokens), {
       httpOnly: true,
@@ -65,7 +70,7 @@ export async function GET(request: Request) {
     console.error('Callback error:', error);
     const errorMessage = error instanceof Error ? error.message : 'Authentication failed';
     return NextResponse.redirect(
-      new URL(`/?error=${encodeURIComponent(errorMessage)}`, request.url)
+      new URL(`/?error=${encodeURIComponent(errorMessage)}`, origin)
     );
   }
 }
