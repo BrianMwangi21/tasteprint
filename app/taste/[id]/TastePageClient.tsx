@@ -108,7 +108,7 @@ export default function TastePageClient({ id }: TastePageClientProps) {
           <div className="flex flex-col md:flex-row gap-8 items-center justify-center">
              <div className="marker-yellow font-elite text-lg md:text-2xl px-4 py-1">SUBJECT UNDER SURVEILLANCE</div>
              <ShareButtons 
-               url={`https://tasteprint.com/taste/${id}`}
+               url={`https://tasteprint.vercel.app/taste/${id}`}
                title={`${analysis.user.displayName}'s Sonic Case File`}
              />
           </div>
