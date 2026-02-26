@@ -15,13 +15,13 @@ export async function GET(request: Request) {
 
     if (error) {
       return NextResponse.redirect(
-        `/?error=${encodeURIComponent(error)}`
+        new URL(`/?error=${encodeURIComponent(error)}`, request.url)
       );
     }
 
     if (!code) {
       return NextResponse.redirect(
-        `/?error=${encodeURIComponent('No authorization code received')}`
+        new URL(`/?error=${encodeURIComponent('No authorization code received')}`, request.url)
       );
     }
 
@@ -33,14 +33,14 @@ export async function GET(request: Request) {
 
     if (!stateCookie || !verifyState(state || '')) {
       return NextResponse.redirect(
-        `/?error=${encodeURIComponent('Invalid or expired state')}`
+        new URL(`/?error=${encodeURIComponent('Invalid or expired state')}`, request.url)
       );
     }
 
     const tokens = await exchangeCodeForTokens(code);
     const userProfile = await getSpotifyUserProfile(tokens.access_token);
 
-    const response = NextResponse.redirect('/analyze');
+    const response = NextResponse.redirect(new URL('/analyze', request.url));
 
     response.cookies.set('spotify_tokens', JSON.stringify(tokens), {
       httpOnly: true,
@@ -65,7 +65,7 @@ export async function GET(request: Request) {
     console.error('Callback error:', error);
     const errorMessage = error instanceof Error ? error.message : 'Authentication failed';
     return NextResponse.redirect(
-      `/?error=${encodeURIComponent(errorMessage)}`
+      new URL(`/?error=${encodeURIComponent(errorMessage)}`, request.url)
     );
   }
 }
