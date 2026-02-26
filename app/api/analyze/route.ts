@@ -60,7 +60,15 @@ export async function POST(request: NextRequest) {
     
     const aiStory = await generateTasteStory(userData);
     
-    const topGenres = [...new Set(userData.topArtists.mediumTerm.flatMap(a => a.genres))].slice(0, 5);
+    const allArtists = [
+      ...userData.topArtists.shortTerm,
+      ...userData.topArtists.mediumTerm,
+      ...userData.topArtists.longTerm,
+      ...userData.recentlyPlayed.flatMap(rp => rp.track.artists)
+    ];
+    const topGenres = [...new Set(allArtists.flatMap(a => a.genres))]
+      .filter(g => g && g.trim().length > 0)
+      .slice(0, 10);
     const allYears = userData.topTracks.mediumTerm.map(t => 
       parseInt(t.album.release_date.split('-')[0])
     ).filter(y => !isNaN(y));

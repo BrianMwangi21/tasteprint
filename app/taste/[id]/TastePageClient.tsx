@@ -189,21 +189,27 @@ export default function TastePageClient({ id }: TastePageClientProps) {
              <div className="h-2 md:h-3 w-full bg-black/10" />
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {summary.topGenres.map((genre, i) => (
-              <div key={i} className="flex gap-4 group cursor-none">
-                <div className="font-glitch text-4xl md:text-6xl opacity-10 group-hover:opacity-100 group-hover:text-red-600 transition-all">0{i+1}</div>
-                <div className="flex-1 border-b-2 border-dashed border-black/20 pb-4">
-                   <h3 className="font-marker text-2xl md:text-4xl uppercase tracking-tighter transform group-hover:-rotate-2 transition-transform">
-                     {genre}
-                   </h3>
-                   <div className="mt-2 flex gap-1">
-                      <div className="w-full h-1 bg-black group-hover:bg-red-600" />
-                   </div>
+          {summary.topGenres && summary.topGenres.length > 0 ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {summary.topGenres.filter(g => g && g.trim().length > 0).map((genre, i) => (
+                <div key={i} className="flex gap-4 group cursor-none">
+                  <div className="font-glitch text-4xl md:text-6xl opacity-10 group-hover:opacity-100 group-hover:text-red-600 transition-all">0{i+1}</div>
+                  <div className="flex-1 border-b-2 border-dashed border-black/20 pb-4">
+                     <h3 className="font-marker text-2xl md:text-4xl uppercase tracking-tighter transform group-hover:-rotate-2 transition-transform">
+                       {genre}
+                     </h3>
+                     <div className="mt-2 flex gap-1">
+                        <div className="w-full h-1 bg-black group-hover:bg-red-600" />
+                     </div>
+                  </div>
                 </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          ) : (
+            <div className="py-12 text-center">
+              <p className="font-elite text-xl opacity-40 uppercase tracking-widest italic">Signal lost. No frequency data detected.</p>
+            </div>
+          )}
         </section>
 
         {/* Criminal Record - Top Tracks */}
@@ -214,7 +220,7 @@ export default function TastePageClient({ id }: TastePageClientProps) {
           </div>
 
           <div className="divide-y-4 divide-[#1a1a1a] zine-card p-0 bg-white overflow-hidden">
-            {topTracks.shortTerm.map((track, i) => (
+            {topTracks.shortTerm.slice(0, 10).map((track, i) => (
               <div key={track.id} className="p-8 md:p-12 flex flex-col md:flex-row md:items-center gap-8 hover:bg-[#1a1a1a] hover:text-white transition-all group">
                 <div className="font-shade text-6xl md:text-8xl opacity-10 group-hover:opacity-100 group-hover:text-red-600 transition-all shrink-0">
                   {(i + 1).toString().padStart(2, '0')}
