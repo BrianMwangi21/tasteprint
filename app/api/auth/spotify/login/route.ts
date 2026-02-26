@@ -1,17 +1,10 @@
 import { NextResponse } from 'next/server';
 import { getSpotifyAuthUrl, generateState } from '@/lib/spotify-auth';
 
-export async function GET(request: Request) {
+export async function GET() {
   try {
-    // Get the origin from the request to construct the proper callback URL
-    const requestUrl = new URL(request.url);
-    const origin = requestUrl.origin;
-    
-    // Construct the callback URL dynamically based on current origin
-    const redirectUri = `${origin}/api/auth/spotify/callback`;
-    
     const state = generateState();
-    const authUrl = getSpotifyAuthUrl(state, redirectUri);
+    const authUrl = getSpotifyAuthUrl(state);
     
     const response = NextResponse.redirect(authUrl);
     

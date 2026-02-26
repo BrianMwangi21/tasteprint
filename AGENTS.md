@@ -1,6 +1,6 @@
 # Instructions
 
-1. Pick the next unchecked item in the `ROADMAP.md`. We are going in order
+1. Pick the next unchecked item in the `ROADMAP.md`. We are going in order. Either this, or assist the user if they ask a specific question or for help then work on that.
 2. Ask any clarification question if the item is not clear.
 3. Work on that item alone. Then run `npm run build` to ensure there are no type errors. Clear them before going to the next step.
 4. Once you have finished the item, INFORM THE USER. ALWAYS INFORM THE USER.
