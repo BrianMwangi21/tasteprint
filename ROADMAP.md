@@ -61,10 +61,10 @@ This roadmap breaks down the entire project into modular, incremental steps. Eac
 - [x] Return public ID for redirect ✅ returns publicId and redirectUrl
 
 ### 3.2 Analysis Retrieval
-- [ ] Create `/api/taste/[id]` GET endpoint
-- [ ] Fetch analysis by publicId from database
-- [ ] Increment view counter
-- [ ] Return formatted analysis data
+- [x] Create `/api/taste/[id]` GET endpoint ✅ created with view counter
+- [x] Fetch analysis by publicId from database ✅ implemented
+- [x] Increment view counter ✅ increments and updates lastViewedAt
+- [x] Return formatted analysis data ✅ returns clean response
 
 ### 3.3 Discovery Feed
 - [ ] Create `/api/feed` GET endpoint
