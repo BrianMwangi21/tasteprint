@@ -11,6 +11,10 @@ export async function GET(request: Request) {
   const requestUrl = new URL(request.url);
   const origin = requestUrl.origin;
   
+  console.log('DEBUG - Callback received at:', request.url);
+  console.log('DEBUG - Origin detected:', origin);
+  console.log('DEBUG - Redirecting to:', new URL('/analyze', origin).toString());
+  
   try {
     const { searchParams } = new URL(request.url);
     const code = searchParams.get('code');
