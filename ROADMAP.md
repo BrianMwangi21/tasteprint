@@ -89,7 +89,7 @@ This roadmap breaks down the entire project into modular, incremental steps. Eac
 - [x] Add rotation animation ✅ continuous rotation with useFrame
 - [x] Add hover interactions (show track info) ✅ info panel with audio feature bars
 - [x] Add mobile-optimized simplified version ✅ reduced tracks/segments for mobile
-- [ ] Optimize for performance (LOD, instancing)
+- [x] Optimize for performance (LOD, instancing) ✅ created OptimizedOrbs with InstancedMesh and LOD
 
 ### 4.3 Time Dilation Tunnel
 - [ ] Create tunnel scene component
