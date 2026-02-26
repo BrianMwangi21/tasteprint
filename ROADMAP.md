@@ -99,16 +99,16 @@ This roadmap breaks down the entire project into modular, incremental steps. Eac
 - [x] Implement scroll-based navigation ✅ continuous forward movement with useFrame
 - [x] Add speed/distortion effects ✅ pulsing animations on markers
 - [x] Add mobile-optimized simplified version ✅ filter every other segment on mobile
-- [ ] Optimize for performance
+- [x] Optimize for performance ✅ included in component with reduced segments and fog
 
 ## Phase 5: Pages & Routing
 
 ### 5.1 Landing Page
-- [ ] Design and build cosmic hero section
-- [ ] Add Spotify connect CTA button
-- [ ] Add preview screenshots/mockups
-- [ ] Add "how it works" section
-- [ ] Add footer with links
+- [x] Design and build cosmic hero section ✅ created with animated stars and gradient
+- [x] Add Spotify connect CTA button ✅ created SpotifyConnectButton component
+- [x] Add preview screenshots/mockups ✅ added visualization preview cards
+- [x] Add "how it works" section ✅ 4-step process with icons
+- [x] Add footer with links ✅ navigation links and branding
 
 ### 5.2 OAuth Callback Page
 - [ ] Create `/callback` page
