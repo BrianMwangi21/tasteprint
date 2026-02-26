@@ -8,7 +8,7 @@ export async function GET(request: NextRequest) {
     const { searchParams } = new URL(request.url);
     
     const name = searchParams.get('name') || 'Someone';
-    const mood = searchParams.get('mood') || 'Cosmic';
+    const mood = searchParams.get('mood') || 'Sonic';
     const genre = searchParams.get('genre') || 'Various';
     
     return new ImageResponse(
@@ -21,12 +21,13 @@ export async function GET(request: NextRequest) {
             flexDirection: 'column',
             alignItems: 'center',
             justifyContent: 'center',
-            backgroundColor: '#0a0a1a',
-            backgroundImage: 'radial-gradient(circle at 50% 50%, #1a1a3a 0%, #0a0a1a 100%)',
+            backgroundColor: '#e8e4db',
+            padding: '40px',
+            fontFamily: 'serif',
             position: 'relative',
           }}
         >
-          {/* Stars background */}
+          {/* Halftone / Grid Texture Simulation */}
           <div
             style={{
               position: 'absolute',
@@ -34,158 +35,104 @@ export async function GET(request: NextRequest) {
               left: 0,
               right: 0,
               bottom: 0,
-              backgroundImage: `radial-gradient(2px 2px at 20px 30px, #eee, rgba(0,0,0,0)),
-                                radial-gradient(2px 2px at 40px 70px, rgba(255,255,255,0.8), rgba(0,0,0,0)),
-                                radial-gradient(2px 2px at 50px 160px, #ddd, rgba(0,0,0,0)),
-                                radial-gradient(2px 2px at 90px 40px, #fff, rgba(0,0,0,0)),
-                                radial-gradient(2px 2px at 130px 80px, rgba(255,255,255,0.6), rgba(0,0,0,0)),
-                                radial-gradient(2px 2px at 160px 120px, #ddd, rgba(0,0,0,0))`,
-              backgroundRepeat: 'repeat',
-              backgroundSize: '200px 200px',
+              backgroundImage: 'radial-gradient(circle, rgba(0,0,0,0.1) 1px, transparent 1px)',
+              backgroundSize: '10px 10px',
+              opacity: 0.5,
             }}
           />
-          
-          {/* Aurora gradient orbs */}
-          <div
-            style={{
-              position: 'absolute',
-              width: '300px',
-              height: '300px',
-              borderRadius: '50%',
-              background: 'radial-gradient(circle, rgba(78,205,196,0.3) 0%, transparent 70%)',
-              top: '10%',
-              left: '10%',
-            }}
-          />
-          <div
-            style={{
-              position: 'absolute',
-              width: '250px',
-              height: '250px',
-              borderRadius: '50%',
-              background: 'radial-gradient(circle, rgba(124,77,255,0.3) 0%, transparent 70%)',
-              bottom: '10%',
-              right: '10%',
-            }}
-          />
-          
-          {/* Main content */}
+
+          {/* Main Card */}
           <div
             style={{
               display: 'flex',
               flexDirection: 'column',
-              alignItems: 'center',
-              justifyContent: 'center',
-              zIndex: 10,
-              padding: '40px',
-              textAlign: 'center',
+              backgroundColor: 'white',
+              border: '10px solid #1a1a1a',
+              boxShadow: '30px 30px 0px #1a1a1a',
+              padding: '60px',
+              width: '90%',
+              height: '80%',
+              position: 'relative',
             }}
           >
-            {/* Logo */}
-            <div
-              style={{
-                fontSize: '48px',
-                fontWeight: 'bold',
-                marginBottom: '20px',
-                background: 'linear-gradient(90deg, #4ECDC4, #6C5CE7)',
-                backgroundClip: 'text',
-                WebkitBackgroundClip: 'text',
-                color: 'transparent',
-                textShadow: '0 0 30px rgba(78,205,196,0.5)',
-              }}
-            >
-              TastePrint
+            {/* Header */}
+            <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '20px' }}>
+              <div style={{ fontSize: '24px', fontWeight: '900', color: '#1a1a1a', opacity: 0.4 }}>VOL. 01 // NO. 442</div>
+              <div style={{ fontSize: '24px', fontWeight: '900', color: '#ff3e3e' }}>TOP SECRET</div>
             </div>
-            
-            {/* User name */}
+
+            {/* Title */}
             <div
               style={{
-                fontSize: '64px',
-                fontWeight: 'bold',
-                color: 'white',
-                marginBottom: '16px',
-                textShadow: '0 0 20px rgba(255,255,255,0.3)',
-              }}
-            >
-              {name}&apos;s
-            </div>
-            
-            {/* Subtitle */}
-            <div
-              style={{
-                fontSize: '36px',
-                color: '#4ECDC4',
+                fontSize: '120px',
+                fontWeight: '900',
+                lineHeight: '0.8',
                 marginBottom: '40px',
-                fontStyle: 'italic',
-              }}
-            >
-              Musical DNA
-            </div>
-            
-            {/* Stats */}
-            <div
-              style={{
+                color: '#1a1a1a',
+                letterSpacing: '-5px',
                 display: 'flex',
-                gap: '40px',
-                marginTop: '20px',
+                flexDirection: 'column',
               }}
             >
-              <div style={{ textAlign: 'center' }}>
-                <div
-                  style={{
-                    fontSize: '32px',
-                    fontWeight: 'bold',
-                    color: '#FFD93D',
-                  }}
-                >
-                  {genre}
-                </div>
-                <div
-                  style={{
-                    fontSize: '18px',
-                    color: '#888',
-                  }}
-                >
-                  Top Genre
-                </div>
-              </div>
-              
-              <div style={{ textAlign: 'center' }}>
-                <div
-                  style={{
-                    fontSize: '32px',
-                    fontWeight: 'bold',
-                    color: '#6C5CE7',
-                  }}
-                >
-                  {mood}
-                </div>
-                <div
-                  style={{
-                    fontSize: '18px',
-                    color: '#888',
-                  }}
-                >
-                  Mood
-                </div>
-              </div>
+              <div style={{ display: 'flex' }}>SONIC</div>
+              <div style={{ display: 'flex', color: '#ff3e3e' }}>PROFILE</div>
             </div>
-            
-            {/* CTA */}
+
+            {/* Name */}
             <div
               style={{
-                marginTop: '50px',
-                padding: '16px 32px',
-                background: 'linear-gradient(90deg, #4ECDC4, #6C5CE7)',
-                borderRadius: '50px',
-                color: 'white',
-                fontSize: '24px',
-                fontWeight: 'bold',
-                boxShadow: '0 0 30px rgba(78,205,196,0.4)',
+                fontSize: '60px',
+                fontWeight: '900',
+                color: '#1a1a1a',
+                padding: '10px 20px',
+                backgroundColor: '#fbff00',
+                alignSelf: 'flex-start',
+                marginBottom: '40px',
+                transform: 'rotate(-2deg)',
               }}
             >
-              Discover Your Musical DNA →
+              {name.toUpperCase()}
             </div>
+
+            {/* Bottom Row */}
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flex: 1 }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                  <div style={{ width: '20px', height: '20px', backgroundColor: '#ff3e3e' }} />
+                  <div style={{ fontSize: '32px', fontWeight: 'bold' }}>MOOD: {mood.toUpperCase()}</div>
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                  <div style={{ width: '20px', height: '20px', backgroundColor: '#1a1a1a' }} />
+                  <div style={{ fontSize: '32px', fontWeight: 'bold' }}>GENRE: {genre.toUpperCase()}</div>
+                </div>
+              </div>
+
+              <div
+                style={{
+                  fontSize: '40px',
+                  fontWeight: '900',
+                  color: '#1a1a1a',
+                  border: '4px solid #1a1a1a',
+                  padding: '10px 20px',
+                  transform: 'rotate(5deg)',
+                }}
+              >
+                TASTEPRINT
+              </div>
+            </div>
+
+            {/* "Tape" simulation */}
+            <div
+              style={{
+                position: 'absolute',
+                top: '-20px',
+                left: '50%',
+                width: '150px',
+                height: '40px',
+                backgroundColor: 'rgba(255,255,255,0.5)',
+                transform: 'translateX(-50%) rotate(2deg)',
+              }}
+            />
           </div>
         </div>
       ),

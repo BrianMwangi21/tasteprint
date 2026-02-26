@@ -2,15 +2,27 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import LoadingDNA from '@/components/ui/LoadingDNA';
-import { RadarUI } from '@/components/ui/ScannerRadar';
+import { ZineBackground, InkDistortionFilter } from '@/components/zine/ZineElements';
 
 export default function AnalyzePage() {
   const router = useRouter();
   const [error, setError] = useState<string | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const [messageIndex, setMessageIndex] = useState(0);
+
+  const messages = [
+    "INTERCEPTING SIGNAL...",
+    "CRACKING AUDIO ENCRYPTION...",
+    "DEVELOPING NEGATIVES...",
+    "SCANNING MUSICAL DNA...",
+    "EXTRACTING SONIC ARTIFACTS...",
+    "FINALIZING MANIFESTO...",
+  ];
 
   useEffect(() => {
+    const msgInterval = setInterval(() => {
+      setMessageIndex((prev) => (prev + 1) % messages.length);
+    }, 2000);
+
     const createAnalysis = async () => {
       try {
         const response = await fetch('/api/analyze', {
@@ -28,7 +40,6 @@ export default function AnalyzePage() {
 
         const data = await response.json();
         
-        // Redirect to the public analysis page
         if (data.redirectUrl) {
           router.push(data.redirectUrl);
         } else {
@@ -36,25 +47,26 @@ export default function AnalyzePage() {
         }
       } catch (err) {
         setError(err instanceof Error ? err.message : 'An error occurred');
-        setIsLoading(false);
       }
     };
 
     createAnalysis();
-  }, [router]);
+    return () => clearInterval(msgInterval);
+  }, [router, messages.length]);
 
   if (error) {
     return (
-      <div className="min-h-screen bg-[#0a0a1a] flex items-center justify-center px-4">
-        <div className="text-center">
-          <div className="text-6xl mb-6">⚠️</div>
-          <h2 className="text-2xl font-bold text-white mb-4">Something went wrong</h2>
-          <p className="text-gray-400 mb-8 max-w-md">{error}</p>
+      <div className="min-h-screen bg-[#e8e4db] flex items-center justify-center px-4 font-mono">
+        <ZineBackground />
+        <div className="zine-card p-12 text-center space-y-6 max-w-md bg-white">
+          <div className="text-6xl">⚠️</div>
+          <h2 className="font-shade text-3xl text-[#ff3e3e]">BREACH FAILED</h2>
+          <p className="font-elite text-lg opacity-70">{error}</p>
           <button
             onClick={() => window.location.href = '/'}
-            className="px-6 py-3 bg-[#4ECDC4] text-white rounded-full font-semibold hover:bg-[#3DBDB4] transition-colors"
+            className="w-full py-4 bg-[#1a1a1a] text-white font-black uppercase tracking-widest hover:bg-red-600 transition-colors"
           >
-            Go Back Home
+            RETURN TO BASE
           </button>
         </div>
       </div>
@@ -62,61 +74,53 @@ export default function AnalyzePage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#0a0a1a] flex flex-col items-center justify-center px-4 relative overflow-hidden">
-      {/* Background effects */}
-      <div className="absolute inset-0 overflow-hidden">
-        {Array.from({ length: 30 }).map((_, i) => (
-          <div
-            key={i}
-            className="absolute w-1 h-1 bg-white rounded-full animate-pulse"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 3}s`,
-              opacity: Math.random() * 0.5 + 0.2,
-            }}
-          />
-        ))}
+    <div className="min-h-screen bg-[#e8e4db] flex flex-col items-center justify-center px-4 relative overflow-hidden font-mono">
+      <ZineBackground />
+      <InkDistortionFilter />
+
+      {/* Xerox Scanning Bar Effect */}
+      <div className="fixed inset-0 pointer-events-none z-[60]">
+        <div className="absolute top-0 left-0 w-full h-[15vh] bg-white opacity-40 blur-xl animate-[xerox-scan_3s_linear_infinite]" />
+        <div className="absolute top-0 left-0 w-full h-[2px] bg-white opacity-80 animate-[xerox-scan_3s_linear_infinite]" />
       </div>
 
-      {/* Radar background */}
-      <div className="absolute inset-0 flex items-center justify-center opacity-30">
-        <RadarUI active={isLoading} className="w-[600px] h-[600px]" />
-      </div>
+      <style>{`
+        @keyframes xerox-scan {
+          0% { transform: translateY(-100vh); }
+          100% { transform: translateY(100vh); }
+        }
+      `}</style>
 
       {/* Main content */}
-      <div className="relative z-10">
-        <LoadingDNA 
-          messages={[
-            "Initializing cosmic scanner...",
-            "Analyzing musical frequencies...",
-            "Mapping your sonic DNA...",
-            "Connecting to the Spotify nebula...",
-            "Extracting audio features...",
-            "Calculating your taste constellation...",
-            "Processing temporal listening patterns...",
-            "Synthesizing your musical genome...",
-            "Aligning with the cosmic frequency...",
-            "Generating your unique TastePrint...",
-            "Almost there... the universe is computing...",
-            "Finalizing your cosmic musical identity...",
-          ]}
-          interval={2500}
-          className="scale-125"
-        />
+      <div className="relative z-10 text-center space-y-12">
+        <div className="zine-card p-12 md:p-20 bg-white transform -rotate-1">
+          <div className="space-y-8">
+            <div className="font-glitch text-4xl md:text-6xl text-[#ff3e3e] animate-pulse">
+              ANALYZING...
+            </div>
+            
+            <div className="h-2 w-full bg-black/5 relative overflow-hidden">
+              <div className="absolute top-0 left-0 h-full bg-black transition-all duration-500 w-full animate-[loading-bar_10s_ease-in-out_infinite]" />
+            </div>
 
-        {/* Fun fact */}
-        <div className="mt-12 text-center max-w-lg mx-auto">
-          <p className="text-gray-500 text-sm italic">
-            Did you know? We're analyzing up to 50 of your top tracks, 
-            50 recently played songs, and extracting detailed audio features 
-            to create your unique visualization.
-          </p>
+            <div className="font-shade text-2xl md:text-4xl tracking-tighter italic min-h-[3rem]">
+              {messages[messageIndex]}
+            </div>
+          </div>
         </div>
+
+        <p className="font-elite text-sm opacity-40 max-w-sm mx-auto uppercase tracking-widest">
+          DO NOT REFRESH. THE REVOLUTION IS BEING DIGITIZED.
+        </p>
       </div>
 
-      {/* Bottom gradient */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#0a0a1a] to-transparent" />
+      <style>{`
+        @keyframes loading-bar {
+          0% { transform: translateX(-100%); }
+          50% { transform: translateX(0%); }
+          100% { transform: translateX(100%); }
+        }
+      `}</style>
     </div>
   );
 }
