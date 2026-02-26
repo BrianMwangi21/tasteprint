@@ -34,6 +34,7 @@ export async function GET(
     return NextResponse.json({
       id: analysis.publicId,
       user: analysis.user,
+      data: analysis.data,
       analysis: analysis.analysis,
       metadata: {
         createdAt: analysis.metadata.createdAt,

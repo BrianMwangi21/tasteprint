@@ -214,6 +214,7 @@ export interface AnalysisDocument {
 export interface AnalysisResponse {
   id: string;
   user: AnalysisDocument['user'];
+  data: UserMusicData;
   analysis: AnalysisDocument['analysis'];
   metadata: {
     createdAt: string;
