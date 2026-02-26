@@ -67,10 +67,10 @@ This roadmap breaks down the entire project into modular, incremental steps. Eac
 - [x] Return formatted analysis data ✅ returns clean response
 
 ### 3.3 Discovery Feed
-- [ ] Create `/api/feed` GET endpoint
-- [ ] Implement pagination (9-12 items per page)
-- [ ] Sort by newest first
-- [ ] Return feed data with user info
+- [x] Create `/api/feed` GET endpoint ✅ created with pagination
+- [x] Implement pagination (9-12 items per page) ✅ default 12 items
+- [x] Sort by newest first ✅ sorted by createdAt desc
+- [x] Return feed data with user info ✅ returns formatted preview data
 
 ## Phase 4: Visualizations
 
