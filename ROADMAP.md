@@ -14,7 +14,7 @@ This roadmap breaks down the entire project into modular, incremental steps. Eac
 - [x] Create directory structure (app, components, lib, models, types) ✅ all directories created
 
 ### 1.2 Database Setup
-- [ ] Create MongoDB connection utility (`lib/mongodb.ts`)
+- [x] Create MongoDB connection utility (`lib/mongodb.ts`) ✅ created with connection caching
 - [ ] Create Mongoose Analysis schema (`models/Analysis.ts`)
 - [ ] Create database type definitions
 - [ ] Test database connection
