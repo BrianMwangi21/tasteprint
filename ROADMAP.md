@@ -11,7 +11,7 @@ This roadmap breaks down the entire project into modular, incremental steps. Eac
 - [x] Install OG image generation (`@vercel/og`) ✅ v0.9.0 installed
 - [x] Install utility libraries (`nanoid`, `clsx`, `tailwind-merge`) ✅ installed
 - [x] Create TypeScript types file (`types/index.ts`) ✅ created with comprehensive types
-- [ ] Create directory structure (app, components, lib, models, types)
+- [x] Create directory structure (app, components, lib, models, types) ✅ all directories created
 
 ### 1.2 Database Setup
 - [ ] Create MongoDB connection utility (`lib/mongodb.ts`)
