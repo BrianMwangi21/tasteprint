@@ -35,7 +35,7 @@ Write the cosmic story now:`;
 
   try {
     const { text } = await generateText({
-      model: openrouter('anthropic/claude-3.5-sonnet'),
+      model: openrouter('openrouter/free'),
       prompt,
       temperature: 0.8,
     });
